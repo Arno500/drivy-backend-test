@@ -1,39 +1,29 @@
 require 'date'
 require 'json'
+require './models/car.rb'
+require './models/rental.rb'
 require './lib/filemanager.rb'
 
-fileManagerInstance = FileManager.new('data/input.json')
-data = fileManagerInstance.getData
+file_manager_instance = FileManager.new('data/input.json')
+data = file_manager_instance.getData
 
-output = Hash[
-    'rentals' => []
-]
+cars = []
+rentals = []
 
-
-data['rentals'].each do |elm|
-    wantedCar = data['cars'][data['cars'].index{ |x| x['id'] == elm['car_id']}]
-    numberOfDays = Date.parse(elm['end_date']) - Date.parse(elm['start_date'])+1
-
-
-    timePrice = 0
-    for x in 0..numberOfDays-1
-        if x >= 1 && x < 4
-            coefficient = 0.9
-        elsif x >= 4 && x < 10
-            coefficient = 0.7
-        elsif x >= 10
-            coefficient = 0.5
-        else
-            coefficient = 1
-        end 
-        timePrice += wantedCar['price_per_day'] * coefficient
-    end
-
-    distancePrice = elm['distance'] * wantedCar['price_per_km']
-    fileManagerInstance.addEntryToFile({
-        'id' => elm['id'],
-        'price' => (distancePrice + timePrice).to_i
-    })
+data['cars'].each do |car|
+  cars.push(Car.new(car['id'], car['price_per_day'], car['price_per_km']))
 end
 
-fileManagerInstance.output()
+data['rentals'].each do |rental|
+  wanted_car = cars.find { |car| car.id == rental['car_id'] }
+  rentals.push(Rental.new(rental['id'], wanted_car, rental['start_date'], rental['end_date'], rental['distance']))
+end
+
+rentals.each do |rental|
+  file_manager_instance.addEntryToFile(
+    id: rental.id,
+    price: rental.final_price
+  )
+end
+
+file_manager_instance.output
