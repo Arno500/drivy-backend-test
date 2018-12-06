@@ -5,7 +5,7 @@ require './models/rental.rb'
 require './lib/filemanager.rb'
 
 file_manager_instance = FileManager.new('data/input.json')
-data = file_manager_instance.getData
+data = file_manager_instance.get_data
 
 cars = []
 rentals = []
@@ -23,7 +23,7 @@ rentals.each do |rental|
   rental.add_commission(:insurance)
   rental.add_commission(:assistance)
   rental.add_commission(:drivy)
-  file_manager_instance.addEntryToFile(
+  file_manager_instance.add_entry_to_file(
     id: rental.id,
     price: rental.final_price,
     commission: rental.fees
