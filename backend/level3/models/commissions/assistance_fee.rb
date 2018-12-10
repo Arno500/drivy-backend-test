@@ -1,7 +1,5 @@
 class AssistanceFee < Commission
-  def name 
-    "assistance_fee"
-  end
+  NAME = 'assistance_fee'
   def calculate
     100 * @days
   end

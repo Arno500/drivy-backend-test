@@ -48,7 +48,7 @@ class Rental
   def fees
     commissions_output = {}
     @commissions.each do |commission|
-      commissions_output[commission.name] = commission.calculate
+      commissions_output[commission.class::NAME] = commission.calculate
     end
     commissions_output
   end

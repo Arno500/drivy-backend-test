@@ -5,9 +5,7 @@ class Array
  end
 
 class DrivyFee < Commission
-  def name 
-    "drivy_fee"
-  end
+  NAME = 'drivy_fee'
   def calculate
     total = 0
     @current.except(self).each do |fee|
