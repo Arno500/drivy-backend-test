@@ -5,11 +5,11 @@ class FileManager
         @output = Hash["rentals" => []]
     end
 
-    def getData
+    def get_data
         return @data
     end
 
-    def addEntryToFile(data)
+    def add_entry_to_file(data)
         @output["rentals"].push(data)
     end
 

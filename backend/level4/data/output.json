@@ -2,7 +2,7 @@
   "rentals": [
     {
       "id": 1,
-      "actions": [
+      "commission": [
         {
           "who": "driver",
           "type": "debit",
@@ -32,7 +32,7 @@
     },
     {
       "id": 2,
-      "actions": [
+      "commission": [
         {
           "who": "driver",
           "type": "debit",
@@ -62,7 +62,7 @@
     },
     {
       "id": 3,
-      "actions": [
+      "commission": [
         {
           "who": "driver",
           "type": "debit",
