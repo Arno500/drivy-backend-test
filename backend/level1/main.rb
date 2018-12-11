@@ -1,7 +1,7 @@
 require 'date'
 require 'json'
-require './models/car.rb'
-require './models/rental.rb'
+require_relative './models/car.rb'
+require_relative './models/rental.rb'
 
 input_file = File.read('data/input.json')
 data = JSON.parse(input_file)
@@ -12,7 +12,7 @@ data['cars'].each do |car|
   cars.push(Car.new(car['id'], car['price_per_day'], car['price_per_km']))
 end
 
-output = Hash[rentals: []]
+output = { rentals: [] }
 
 data['rentals'].each do |rental|
   wanted_car = cars.find { |car| car.id == rental['car_id'] }
