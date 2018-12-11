@@ -4,6 +4,11 @@ require_relative 'commissions/commission.rb'
 class Rental
   attr_reader :id, :car, :days, :distance
   attr_accessor :commissions
+  COMMISSION_TYPES = {
+    insurance: InsuranceFee,
+    assistance: AssistanceFee,
+    drivy: DrivyFee
+  }.freeze
   def initialize(id, car, start_date, end_date, distance)
     @id = id
     @car = car
@@ -13,11 +18,6 @@ class Rental
     @distance = distance.to_i
 
     @commissions = []
-    @commission_types = {
-      insurance: InsuranceFee,
-      assistance: AssistanceFee,
-      drivy: DrivyFee
-    }
   end
 
   def time_price
@@ -47,7 +47,7 @@ class Rental
   end
 
   def add_commission(type)
-    @commissions.push(@commission_types[type].new(final_price, distance, days, @commissions))
+    @commissions.push(COMMISSION_TYPES[type].new(final_price, distance, days, @commissions))
   end
 
   def fees
