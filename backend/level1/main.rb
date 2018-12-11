@@ -1,7 +1,7 @@
 require 'date'
 require 'json'
-require_relative './models/car.rb'
-require_relative './models/rental.rb'
+require_relative 'models/car.rb'
+require_relative 'models/rental.rb'
 
 input_file = File.read('data/input.json')
 data = JSON.parse(input_file)
