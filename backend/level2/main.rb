@@ -6,13 +6,13 @@ fileManagerInstance = FileManager.new('data/input.json')
 data = fileManagerInstance.getData
 
 output = Hash[
-    "rentals" => []
+    'rentals' => []
 ]
 
 
-data["rentals"].each do |elm|
-    wantedCar = data["cars"][data["cars"].index{ |x| x["id"] == elm["car_id"]}]
-    numberOfDays = Date.parse(elm["end_date"]) - Date.parse(elm["start_date"])+1
+data['rentals'].each do |elm|
+    wantedCar = data['cars'][data['cars'].index{ |x| x['id'] == elm['car_id']}]
+    numberOfDays = Date.parse(elm['end_date']) - Date.parse(elm['start_date'])+1
 
 
     timePrice = 0
@@ -26,13 +26,13 @@ data["rentals"].each do |elm|
         else
             coefficient = 1
         end 
-        timePrice += wantedCar["price_per_day"] * coefficient
+        timePrice += wantedCar['price_per_day'] * coefficient
     end
 
-    distancePrice = elm["distance"] * wantedCar["price_per_km"]
+    distancePrice = elm['distance'] * wantedCar['price_per_km']
     fileManagerInstance.addEntryToFile({
-        "id" => elm["id"],
-        "price" => (distancePrice + timePrice).to_i
+        'id' => elm['id'],
+        'price' => (distancePrice + timePrice).to_i
     })
 end
 
