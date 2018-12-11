@@ -12,16 +12,21 @@ class Rental
   end
 
   def time_price
-    time_price = 0
-    (0..@days - 1).each do |x|
-      coefficient = if x >= 1 && x < 4 then 0.9
-                    elsif x >= 4 && x < 10 then 0.7
-                    elsif x >= 10 then 0.5
-                    else 1
-                    end
-      time_price += @car.price_per_day * coefficient
+    prices = (0..@days - 1).map do |x|
+      @car.price_per_day * time_coefficient(x)
     end
-    time_price
+    prices.sum
+  end
+
+  STEP = [1,4,10].freeze
+  COEFFICIENT = [0.9,0.7,0.5].freeze
+  def time_coefficient(day_number)
+    coefficient = if day_number >= STEP[0] && day_number < STEP[1] then COEFFICIENT[0]
+                  elsif day_number >= STEP[1] && day_number < STEP[2] then COEFFICIENT[1]
+                  elsif day_number >= STEP[2] then COEFFICIENT[2]
+                  else 1
+                  end
+    coefficient
   end
 
   def distance_price
