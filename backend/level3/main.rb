@@ -1,11 +1,11 @@
 require 'date'
 require 'json'
-require_relative './models/car.rb'
-require_relative './models/rental.rb'
-require_relative './lib/filemanager.rb'
+require_relative 'models/car.rb'
+require_relative 'models/rental.rb'
+require_relative 'lib/filemanager.rb'
 
-file_manager_instance = FileManager.new('data/input.json')
-data = file_manager_instance.get_data
+file_manager = FileManager.new('data/input.json')
+data = file_manager.get_data
 
 cars = []
 rentals = []
@@ -23,11 +23,11 @@ rentals.each do |rental|
   rental.add_commission(:insurance)
   rental.add_commission(:assistance)
   rental.add_commission(:drivy)
-  file_manager_instance.add_entry_to_file(
+  file_manager.add_entry_to_file(
     id: rental.id,
     price: rental.final_price,
     commission: rental.fees
   )
 end
 
-file_manager_instance.output
+file_manager.output
