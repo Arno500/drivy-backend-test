@@ -15,7 +15,6 @@ class Rental
     @days * @car.price_per_day
   end
 
-  # Erreur ici
   def distance_price
     @distance * @car.price_per_km
   end
