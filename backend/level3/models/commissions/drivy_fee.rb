@@ -11,6 +11,6 @@ class DrivyFee < Commission
     @current.except(self).each do |fee|
       total += fee.calculate
     end
-    (@amount - total).to_i
+    (amount - total).to_i
   end
 end
