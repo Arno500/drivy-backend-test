@@ -1,20 +1,20 @@
 class FileManager
     def initialize(path="data/input.json")
-        inputFile = File.read('data/input.json')
-        @data = JSON.parse(inputFile)
-        @output = Hash["rentals" => []]
+        input_file = File.read('data/input.json')
+        @data = JSON.parse(input_file)
+        @output = {"rentals" => []}
     end
 
-    def getData
+    def get_data
         return @data
     end
 
-    def addEntryToFile(data)
+    def add_entry_to_file(data)
         @output["rentals"].push(data)
     end
 
     def output(path="data/output.json")
-        outputFile = File.new(path, "w")
-        outputFile.syswrite(JSON.pretty_generate(@output))
+        output_file = File.new(path, "w")
+        output_file.syswrite(JSON.pretty_generate(@output))
     end
 end
