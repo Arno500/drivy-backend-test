@@ -1,8 +1,8 @@
 require 'date'
 require 'json'
-require './models/car.rb'
-require_relative './models/rental.rb'
-require_relative './lib/filemanager.rb'
+require_relative 'models/car.rb'
+require_relative 'models/rental.rb'
+require_relative 'lib/filemanager.rb'
 
 file_manager_instance = FileManager.new('data/input.json')
 data = file_manager_instance.get_data
